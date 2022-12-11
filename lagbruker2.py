@@ -4,6 +4,12 @@ from PIL import ImageTk
 import pymysql
 
 
+def clear():
+    emailFyll.delete(0,END)
+    BrukernavnFyll.delete(0,END)
+    PassordFyll.delete(0,END)
+    Pass_BK_Fyll.delete(0,END)
+
 def login_page():
     lagbruker_window.destroy()
     import login2
@@ -13,6 +19,25 @@ def connect_database():
         messagebox.showerror('Error', 'All feltene må bli fyllt inn')
     elif PassordFyll.get() != Pass_BK_Fyll.get():
         messagebox.showerror('Error', 'Passordene matcher ikke')
+    else:
+        try:
+            con=pymysql.connect(host='10.2.1.88',port=3306,username='Admin',password='admin',database='userdata')
+            mycursor=con.cursor()
+        except:
+            messagebox.showerror('Error', 'Kunne ikke koble til database, vennligst prøv igjen')
+            return
+        try:
+            query='create table userdata (id int auto_increment primary key not null, email varchar(50), username varchar(100), password varchar(30)'
+            mycursor.execute(query)
+        except:
+            mycursor.execute('use userdata')
+
+        query='insert into userdata(email,username,password values(%s, %s, %s)'
+        mycursor.execute(query,(emailFyll.get(),BrukernavnFyll.get(),PassordFyll.get()))
+        con.commit()
+        con.close()
+        messagebox.showinfo('Success', 'Registreringen er suksessfull')
+
 lagbruker_window=Tk()
 lagbruker_window.title('Oprett Bruker') #Applikasjons Tittel
 lagbruker_window.resizable(False,False) #Lar dem ikke endre på applikasjon størrelse

@@ -10,7 +10,9 @@ def user_enter(event): #Fjerner brukernavn teksten i feltet
 def pass_enter(event): #Fjerner passord teksten i feltet
     if passwordEntry.get()=='Password':
         passwordEntry.delete(0,END)
-
+def signup_page():
+    login_vindu.destroy()
+    import lagbruker2
 
 login_vindu=Tk()
 login_vindu.geometry('900x600+50+50') #Størrelse på vinduet
