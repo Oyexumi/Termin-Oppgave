@@ -1,27 +1,31 @@
 from tkinter import *
+from tkinter import messagebox
 from PIL import ImageTk
+import pymysql
 #GUI del
 
 #Funksjoner
 def user_enter(event): #Fjerner brukernavn teksten i feltet
-    if usernameEntry.get()=='Username':
+    if usernameEntry.get()=='Brukernavn':
         usernameEntry.delete(0,END)
 
 def pass_enter(event): #Fjerner passord teksten i feltet
-    if passwordEntry.get()=='Password':
+    if passwordEntry.get()=='Passord':
         passwordEntry.delete(0,END)
-def signup_page():
+def email_enter(event): #Fjerner passord teksten i feltet
+    if emailFyll.get()=='Email':
+        emailFyll.delete(0,END)
+def signup_page(): #Om du trykker på lag bruker så lukker du login2 og kommer til login2
     login_vindu.destroy()
-    import lagbruker2
+    import login2
 
 login_vindu=Tk()
-login_vindu.geometry('900x600+50+50') #Størrelse på vinduet
-login_vindu.resizable(0,0)
+login_vindu.resizable(FALSE,FALSE)
 login_vindu.title('Login Side')
-bgImage=ImageTk.PhotoImage(file='vista.jpg')
+bgImage=ImageTk.PhotoImage(file='bg.jpg')
 
 bgLabel=Label(login_vindu,image=bgImage)
-bgLabel.place(x=0, y=0)
+bgLabel.grid()
 
 heading=Label(login_vindu,text='User Login',font=('Microsoft Yahei UI Light',21,'bold'),bg='white')
 heading.place(x=400,y=200)
@@ -30,6 +34,7 @@ usernameEntry=Entry(login_vindu, width=25,font=('Microsoft Yahei UI Light',11,'b
 usernameEntry.place(x=400,y=280)
 usernameEntry.insert(0, 'Username')
 
+#Når du trykker på input feltet så fjerner den "USERNAME" teksten
 usernameEntry.bind('<FocusIn>', user_enter)
 
 frame1=Frame(login_vindu,width=227,height=2,bg='black')
@@ -38,6 +43,8 @@ frame1.place(x=400,y=302)
 
 passwordEntry=Entry(login_vindu, width=25,font=('Microsoft Yahei UI Light',11,'bold'),bd=0,)
 passwordEntry.place(x=400,y=340)
+
+#Når du trykker på input feltet så fjerner den "Passord" teksten
 passwordEntry.insert(0, 'Password')
 
 passwordEntry.bind('<FocusIn>', pass_enter)
