@@ -6,62 +6,67 @@ import pymysql
 
 #Funksjoner
 def user_enter(event): #Fjerner brukernavn teksten i feltet
-    if usernameEntry.get()=='Brukernavn':
-        usernameEntry.delete(0,END)
+    if BrukernavnFyll.get()=='Brukernavn':
+        BrukernavnFyll.delete(0,END)
 
 def pass_enter(event): #Fjerner passord teksten i feltet
-    if passwordEntry.get()=='Passord':
-        passwordEntry.delete(0,END)
+    if PassordFyll.get()=='Passord':
+        PassordFyll.delete(0,END)
 def email_enter(event): #Fjerner passord teksten i feltet
     if emailFyll.get()=='Email':
         emailFyll.delete(0,END)
 def signup_page(): #Om du trykker på lag bruker så lukker du login2 og kommer til login2
     login_vindu.destroy()
-    import login2
-
+    import lagbruker
 login_vindu=Tk()
-login_vindu.resizable(FALSE,FALSE)
+login_vindu.resizable(FALSE,FALSE) #Gjør at appen ikke kan endre størrelse
 login_vindu.title('Login Side')
-bgImage=ImageTk.PhotoImage(file='bg.jpg')
-
+bgImage=ImageTk.PhotoImage(file='bg.jpg') #Bakgrunnsbildet
 bgLabel=Label(login_vindu,image=bgImage)
 bgLabel.grid()
 
-heading=Label(login_vindu,text='User Login',font=('Microsoft Yahei UI Light',21,'bold'),bg='white')
-heading.place(x=400,y=200)
-
-usernameEntry=Entry(login_vindu, width=25,font=('Microsoft Yahei UI Light',11,'bold'),bd=0,)
-usernameEntry.place(x=400,y=280)
-usernameEntry.insert(0, 'Username')
-
-#Når du trykker på input feltet så fjerner den "USERNAME" teksten
-usernameEntry.bind('<FocusIn>', user_enter)
-
-frame1=Frame(login_vindu,width=227,height=2,bg='black')
-frame1.place(x=400,y=302)
+frame=Frame(login_vindu,width=50,height=20,bg='white')
+frame.place(x=554,y=100)
 
 
-passwordEntry=Entry(login_vindu, width=25,font=('Microsoft Yahei UI Light',11,'bold'),bd=0,)
-passwordEntry.place(x=400,y=340)
+heading=Label(frame,text='Log inn ',font=('Microsoft Yahei UI Light',18,'bold'),bg='white',
+fg='firebrick1')
+heading.place(x=80,y=200)
+heading.grid(row=0,column=0,padx=10,pady=10)
+#Det
+emailBox=Label(frame,text='Email',font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
+emailBox.grid(row=1,column=0,sticky='w',padx=25)
 
-#Når du trykker på input feltet så fjerner den "Passord" teksten
-passwordEntry.insert(0, 'Password')
+emailFyll=Entry(frame,width=25,font=('Microsot Yahei UI Light',10,'bold'),fg='white', bg='firebrick1')
+emailFyll.grid(row=2,column=0,sticky='w',padx=25)
+emailFyll.insert(0, 'Email')
+emailFyll.bind('<FocusIn>', email_enter)
 
-passwordEntry.bind('<FocusIn>', pass_enter)
+BrukernavnBox=Label(frame,text='Brukernavn',font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
+BrukernavnBox.grid(row=3,column=0,sticky='w',padx=25,pady=(12,0))
 
-frame2=Frame(login_vindu,width=227,height=2,bg='black')
-frame2.place(x=400,y=362)
+BrukernavnFyll=Entry(frame,width=25,font=('Microsot Yahei UI Light',10,'bold'),fg='white',bg='firebrick1')
+BrukernavnFyll.grid(row=4,column=0,sticky='w',padx=25)
+BrukernavnFyll.insert(0, 'Brukernavn')
+BrukernavnFyll.bind('<FocusIn>', user_enter)
 
-loginLag=Button(login_vindu,text='Har du ikke bruker? Trykk Her',bd=0,bg='white',activebackground='white',
-                    cursor='hand2',font=('Microsoft Yahei UI Light',8,'bold'))
-loginLag.place(x=478,y=380)
+PassordBox=Label(frame,text='Passord',
+font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
+PassordBox.grid(row=5,column=0,sticky='w',padx=25,pady=(12,0))
 
-loginButton=Button(login_vindu,text='Login',font=('Open Sans',16,'bold'),fg='indigo',bg='white')
+PassordFyll=Entry(frame,width=25,font=('Microsot Yahei UI Light',10,'bold'),fg='white',bg='firebrick1')
+PassordFyll.grid(row=6,column=0,sticky='w',padx=25)
+PassordFyll.insert(0, 'Passord')
+PassordFyll.bind('<FocusIn>', pass_enter)
 
-loginButton.place(x=400,y=425)
+#Lag Bruker
+login=Button(frame,text='Log inn',bd=0,bg='firebrick1',activebackground='firebrick1',activeforeground='white',
+                    cursor='hand2',font=('Microsoft Yahei UI Light',17,'bold'),width=17,)
+login.grid(row=9,column=0,sticky='w',padx=25,pady=25)
 
-ellerLabel=Label(login_vindu,text='------------------Eller------------------',font=('Open Sans',16,'bold'),fg='indigo',bg='white')
-ellerLabel.place(x=400,y=501)
+signup=Button(frame,text='Oprett ny bruker',bd=0,bg='firebrick1',activebackground='firebrick1',activeforeground='white',
+                    cursor='hand2',font=('Microsoft Yahei UI Light',14,'bold'),width=17,command=signup_page)
+signup.grid(row=11,column=0,sticky='w',padx=40,pady=25)
+
 
 login_vindu.mainloop() #loopen lar programmet kjøre
-
