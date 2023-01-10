@@ -94,7 +94,7 @@ LagBruker=Button(frame,text='Lag Bruker',bd=0,bg='firebrick1',activebackground='
                     cursor='hand2',font=('Microsoft Yahei UI Light',17,'bold'),width=17,command=connect_database)
 LagBruker.grid(row=9,column=0,sticky='w',padx=25,pady=25)
 
-HarBruker=Button(frame,text='Log inn her',bd=0,bg='firebrick1',activebackground='firebrick1',activeforeground='white',
+HarBruker=Button(frame,text='Hopp over',bd=0,bg='firebrick1',activebackground='firebrick1',activeforeground='white',
                     cursor='hand2',font=('Microsoft Yahei UI Light',15,'bold'),width=17,command=connect_login)
 HarBruker.grid(row=11,column=0,sticky='w',padx=25,pady=25)
 

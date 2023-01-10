@@ -1,7 +1,7 @@
 import pymysql
 
 # Connect to the MySQL server.
-conn = pymysql.connect(host='10.2.1.88', port='3306', user='admin', password='admin')
+conn = pymysql.connect(host='10.2.1.88', port=3306, user='admin', password='admin')
 
 # Create a cursor object to execute queries.
 cur = conn.cursor()

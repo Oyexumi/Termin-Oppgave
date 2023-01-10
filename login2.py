@@ -18,6 +18,9 @@ def email_enter(event): #Fjerner passord teksten i feltet
 def signup_page(): #Om du trykker på lag bruker så lukker du login2 og kommer til login2
     login_vindu.destroy()
     import lagbruker
+def spill_enter(): #Om du trykker på lag bruker så lukker du login2 og kommer til login2
+    login_vindu.destroy()
+    import spill.py
 login_vindu=Tk()
 login_vindu.resizable(FALSE,FALSE) #Gjør at appen ikke kan endre størrelse
 login_vindu.title('Login Side')
@@ -68,5 +71,8 @@ signup=Button(frame,text='Oprett ny bruker',bd=0,bg='firebrick1',activebackgroun
                     cursor='hand2',font=('Microsoft Yahei UI Light',14,'bold'),width=17,command=signup_page)
 signup.grid(row=11,column=0,sticky='w',padx=40,pady=25)
 
+Spill=Button(frame,text='Hopp Over',bd=0,bg='firebrick1',activebackground='firebrick1',activeforeground='white',
+                    cursor='hand2',font=('Microsoft Yahei UI Light',14,'bold'),width=10,command=spill_enter)
+Spill.grid(row=12,column=0,sticky='w',padx=40,pady=10)
 
 login_vindu.mainloop() #loopen lar programmet kjøre
